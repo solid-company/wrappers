@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <PackageProjectUrl>https://solidcompany.pl</PackageProjectUrl>
+    <Description>Logging abstractions for SolidCompany.Wrappers.* packages</Description>
+
+    <PackageId>SolidCompany.Wrappers.Logging.Abstractions</PackageId>
+    <Authors>Solid Company</Authors>
+    <Company>Solid Company sp. z o.o., https://solidcompany.pl</Company>
+    <PackageTags>wkhtmltoimage;logging;netstandard</PackageTags>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageIcon>icon-96x96.png</PackageIcon>
+    <RepositoryUrl>https://github.com/solid-company/wrappers</RepositoryUrl>
+    <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\Shared\icon-96x96.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

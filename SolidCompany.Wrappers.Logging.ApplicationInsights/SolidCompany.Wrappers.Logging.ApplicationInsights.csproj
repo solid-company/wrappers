@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <PackageProjectUrl>https://solid.jobs</PackageProjectUrl>
+    <Description>Azure Application Insights implementation for SolidCompany.Wrappers.Logging.Abstractions</Description>
+
+    <PackageId>SolidCompany.Wrappers.Logging.ApplicationInsights</PackageId>
+    <Authors>Solid Company</Authors>
+    <Company>Solid Company sp. z o.o., https://solidcompany.pl</Company>
+    <PackageTags>wkhtmltoimage;logging;azure-application-insights;application-insights;netstandard</PackageTags>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageIcon>icon-96x96.png</PackageIcon>
+    <RepositoryUrl>https://github.com/solid-company/wrappers</RepositoryUrl>
+    <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights" Version="2.17.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SolidCompany.Wrappers.Logging.Abstractions\SolidCompany.Wrappers.Logging.Abstractions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\Shared\icon-96x96.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
