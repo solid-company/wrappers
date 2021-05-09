@@ -30,6 +30,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\README.md" Pack="true" PackagePath="\"/>
     <None Remove="Resources\wkhtmltoimage-x64.zip" />
     <None Remove="Resources\wkhtmltoimage-x86.zip" />
     <None Include="..\Shared\icon-96x96.png">
