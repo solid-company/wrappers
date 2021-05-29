@@ -35,7 +35,7 @@ namespace SolidCompany.Wrappers.WkHtmlToImage.Internals
             if (!Directory.Exists(workdir))
                 Directory.CreateDirectory(workdir);
 
-            var inputFilePath = await CreateInputFileAsync(htmlImput, cancellationToken);
+            var inputFilePath = await CreateInputFileAsync(htmlImput);
             var outputFilePath = Path.Combine(workdir, $"{Path.GetRandomFileName()}.{imageFormat.Name}");
 
             var parameterBuilder = new StringBuilder();
@@ -111,16 +111,14 @@ namespace SolidCompany.Wrappers.WkHtmlToImage.Internals
             return outputStream;
         }
 
-
-        private async Task<string> CreateInputFileAsync(string htmlImput, CancellationToken cancellationToken)
+        private async Task<string> CreateInputFileAsync(string htmlImput)
         {
-            var inputBytes = Encoding.UTF8.GetBytes(htmlImput);
-
             // wkhtmltoimage doesn't support random extension names
             var inputFilePath = Path.Combine(workdir, Path.GetRandomFileName() + ".htm");
 
             await using var inputStream = File.Create(inputFilePath);
-            await inputStream.WriteAsync(inputBytes, 0, inputBytes.Length, cancellationToken);
+            await using var textWriter = new StreamWriter(inputStream, Encoding.UTF8);
+            await textWriter.WriteAsync(htmlImput);
 
             inputStream.Close();
 
@@ -136,8 +134,6 @@ namespace SolidCompany.Wrappers.WkHtmlToImage.Internals
             catch (Exception e)
             {
                 logger.LogError(e, "Failed deleting a workdir directory \"{WorkdirDirectory}\".", workdir);
-                
-                throw;
             }
         }
     }
