@@ -116,11 +116,16 @@ namespace SolidCompany.Wrappers.WkHtmlToImage.Internals
             // wkhtmltoimage doesn't support random extension names
             var inputFilePath = Path.Combine(workdir, Path.GetRandomFileName() + ".htm");
 
-            await using var inputStream = File.Create(inputFilePath);
-            await using var textWriter = new StreamWriter(inputStream, Encoding.UTF8);
-            await textWriter.WriteAsync(htmlImput);
+            // ReSharper disable once ConvertToUsingDeclaration
+            await using (var inputStream = File.Create(inputFilePath))
+            {
+                await using var textWriter = new StreamWriter(inputStream, Encoding.UTF8);
+                await textWriter.WriteAsync(htmlImput);
 
-            inputStream.Close();
+                await textWriter.FlushAsync();
+
+                inputStream.Close();
+            }
 
             return inputFilePath;
         }
