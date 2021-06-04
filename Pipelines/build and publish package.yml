@@ -26,7 +26,7 @@ steps:
   inputs:
     command: 'custom'
     custom: 'pack'
-    arguments: '--configuration $(buildConfiguration) -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg -p:PackageVersion=$(majorVersion).$(minorVersion).$(patchVersion)'
+    arguments: '--configuration $(buildConfiguration) -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg -p:PackageVersion=$(majorVersion).$(minorVersion).$(patchVersion) -p:ContinuousIntegrationBuild=true -p:GitRepositoryRemoteName=github'
     packagesToPack: '**/*.csproj;!**/*.Tests.csproj'
     nobuild: true
 
