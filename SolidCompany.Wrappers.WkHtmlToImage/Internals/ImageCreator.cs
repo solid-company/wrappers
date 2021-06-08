@@ -121,10 +121,6 @@ namespace SolidCompany.Wrappers.WkHtmlToImage.Internals
             {
                 await using var textWriter = new StreamWriter(inputStream, Encoding.UTF8);
                 await textWriter.WriteAsync(htmlImput);
-
-                await textWriter.FlushAsync();
-
-                inputStream.Close();
             }
 
             return inputFilePath;
