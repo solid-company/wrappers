@@ -32,7 +32,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SolidCompany.Wrappers.Logging.Abstractions\SolidCompany.Wrappers.Logging.Abstractions.csproj" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>

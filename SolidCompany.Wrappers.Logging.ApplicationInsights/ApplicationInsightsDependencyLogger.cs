@@ -13,11 +13,20 @@ namespace SolidCompany.Wrappers.Logging.ApplicationInsights
         private readonly TelemetryClient telemetryClient;
 
         /// <summary>
-        /// Creates a new instance of <see cref="ApplicationInsightsDependencyLogger"/>.
+        /// Creates a new instance of <see cref="ApplicationInsightsDependencyLogger"/> with default telemetry configuration.
         /// </summary>
         public ApplicationInsightsDependencyLogger()
         {
             this.telemetryClient = new TelemetryClient(TelemetryConfiguration.CreateDefault());
+        }
+
+        /// <summary>
+        /// Creates a new instance of <see cref="ApplicationInsightsDependencyLogger"/>
+        /// </summary>
+        /// <param name="telemetryClient">Telemetry client provided via dependency injection</param>
+        public ApplicationInsightsDependencyLogger(TelemetryClient telemetryClient)
+        {
+            this.telemetryClient = telemetryClient;
         }
 
         /// <inheritdoc />
