@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using SolidCompany.Wrappers.Logging.Abstractions;
 
 namespace SolidCompany.Wrappers.WkHtmlToImage.Registration
@@ -29,15 +30,36 @@ namespace SolidCompany.Wrappers.WkHtmlToImage.Registration
         /// The <see cref="IServiceCollection"/>.
         public static IServiceCollection AddHtmlToImageConversion(this IServiceCollection serviceCollection, Action<HtmlToImageOptions> configure)
         {
-            serviceCollection.AddSingleton<IHtmlToImage, HtmlToImage>();
-
-            serviceCollection.AddSingleton(serviceProvider =>
+            serviceCollection.AddSingleton<IHtmlToImage, HtmlToImage>(sp =>
             {
                 var options = new HtmlToImageOptions();
-
                 configure(options);
 
-                return options;
+                var loggerFactory = sp.GetRequiredService<ILoggerFactory>();
+
+                return new HtmlToImage(options, loggerFactory);
+            });
+
+            return serviceCollection;
+        }
+
+
+        /// <summary>
+        /// Adds image conversion services to the specified <see cref="IServiceCollection" />.
+        /// </summary>
+        /// <param name="serviceCollection">The <see cref="IServiceCollection"/> instance.</param>
+        /// <param name="configure">An <see cref="Action{HtmlToImageOptions}"/> to configure the provided <see cref="HtmlToImageOptions"/>.</param>
+        /// The <see cref="IServiceCollection"/>.
+        public static IServiceCollection AddHtmlToImageConversion(this IServiceCollection serviceCollection, Action<IServiceProvider, HtmlToImageOptions> configure)
+        {
+            serviceCollection.AddSingleton<IHtmlToImage, HtmlToImage>(sp =>
+            {
+                var options = new HtmlToImageOptions();
+                configure(sp, options);
+
+                var loggerFactory = sp.GetRequiredService<ILoggerFactory>();
+
+                return new HtmlToImage(options, loggerFactory);
             });
 
             return serviceCollection;
