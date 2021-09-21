@@ -45,9 +45,9 @@ You can pass a few additional options to configuration:
 
 ```C#
 
-services.AddHtmlToImageConversion(options =>
+services.AddHtmlToImageConversion((serviceProvider, options) =>
 {
-    options.DependencyLogger = new ApplicationInsightsDependencyLogger();
+    options.DependencyLogger = new ApplicationInsightsDependencyLogger(serviceProvider.GetRequiredService<TelemetryClient>());
     options.ExecutionTimeout = TimeSpan.FromMinutes(2);
     options.ExectuionDirectory = new CustomDirectory("C:/Temp");
 });
